@@ -1,0 +1,15 @@
+{
+    "language-name": "English",
+    "sel-server": "Select server",
+    "select":"select",
+    "btn-connected": "Connected",
+    "btn-connect": "Connect",
+    "btn-connecting": "Connecting...",
+    "btn-disconnect": "Disconnect",
+    "CONNECTION-ERROR": "Conection error",
+    "TIMEOUT": "The connection timed out",
+    "settings": "Settings",
+    "language": "Language",
+    "btn-ok": "Accept",
+    "sel-theme":"Theme"
+}

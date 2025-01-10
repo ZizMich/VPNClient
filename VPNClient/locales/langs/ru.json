@@ -1,0 +1,12 @@
+{
+    "language-name": "Русский",
+    "sel-server": "Выберете сервер",
+    "btn-connect": "Подключится",
+    "btn-connecting": "Подключение...",
+    "btn-disconnect": "Отключится",
+    "err": "Ошибка подключения",
+    "settings": "Настройки",
+    "language": "Язык",
+    "btn-ok": "Принять",
+    "sel-theme":"Тема"
+}

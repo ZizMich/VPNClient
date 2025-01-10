@@ -1,0 +1,14 @@
+{
+    "language-name": "Deutsch",
+    "sel-server": "Server auswählen",
+    "select":"auswählen",
+    "btn-connected": "Verbunden",
+    "btn-connect": "Verbinden",
+    "btn-connecting": "Verbindung herstellen...",
+    "btn-disconnect": "Trennen",
+    "err": "Verbindungsfehler",
+    "settings": "Einstellungen",
+    "language": "Sprache",
+    "btn-ok": "Akzeptieren",
+    "sel-theme":"Thema"
+   }
