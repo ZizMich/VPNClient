@@ -11,7 +11,7 @@ export async function startOvpn(serverCode:number,onWait?:()=>void, onConnected?
   const req =  await getVpn(serverCode);
   let timeout = Number(await AsyncStorage.getItem("settings-timeout"));
   if (!timeout) {
-    timeout = 10;
+    timeout = 20;
   }
   const timeoutInMilliseconds = timeout * 1000;
   try {
