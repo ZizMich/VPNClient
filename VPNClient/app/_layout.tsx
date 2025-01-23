@@ -7,8 +7,8 @@ export default function App() {
     <LanguageProvider>
     <ThemeProvider>
     <Stack>
-        <Stack.Screen name="index" options={{headerShown:false}}/>
-        <Stack.Screen name="settings" options={{headerShown:false}}/>
+        <Stack.Screen name="index" options={{headerShown:false, statusBarHidden:true, animation:"slide_from_left"}}/>
+        <Stack.Screen name="settings" options={{headerShown:false,statusBarHidden:true, animation:"slide_from_right"}}/>
 
     </Stack>
     </ThemeProvider>

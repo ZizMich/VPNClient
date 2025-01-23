@@ -1,18 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import {
-  TouchableOpacity,
-  StyleProp,
-  ViewStyle,
-  TextStyle,
-  Animated,
-} from "react-native";
+import { TouchableOpacity, StyleSheet, Animated } from "react-native";
 import i18n from "@/locales/i18n";
 
 interface ConnectButtonProps {
   onPress: () => void;
-  style: {
-    mainButton: StyleProp<ViewStyle>;
-    title: StyleProp<TextStyle>;
+  colors: {
+    mainButton: string;
+    title: string;
   };
   isConnecting?: boolean;
   isConnected?: boolean;
@@ -20,7 +14,7 @@ interface ConnectButtonProps {
 
 const ConnectButton: React.FC<ConnectButtonProps> = ({
   onPress,
-  style,
+  colors,
   isConnecting,
   isConnected,
 }) => {
@@ -34,6 +28,26 @@ const ConnectButton: React.FC<ConnectButtonProps> = ({
       return i18n.t("btn-connect");
     }
   }
+  const style = StyleSheet.create({
+    title: {
+      fontSize: 18,
+      fontWeight: "bold",
+      color: colors.title,
+    },
+    mainButton: {
+      backgroundColor: colors.mainButton,
+      padding: 10,
+      borderRadius: 100,
+      width: 200,
+      height: 200,
+      zIndex: -1,
+      justifyContent: "center",
+      alignItems: "center",
+      bottom: "50%",
+      marginLeft: 100,
+      position: "absolute",
+    },
+  });
   useEffect(() => {
     if (isConnecting) {
       startAnimation();

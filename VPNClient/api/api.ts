@@ -12,7 +12,7 @@ export const getServers = async () => {
     } catch (error) {
     }
   };
-  export const getVpn = async (id:number) => {
+  export const getVpn = async (id:number): Promise<{configuration:string, name:string, countrycode:string}> => {
     try {
       const response = await axios.get('https://api.eventshock.ru/vpn/api/get-vpn-' + String(id), {
         headers: {
@@ -21,5 +21,11 @@ export const getServers = async () => {
       });
     return response.data
     } catch (error) {
+      return {configuration:'', name:'', countrycode:""}
     }
+  };
+
+  export const getConfig = async (id:number) => {
+    const data = await getVpn(id)
+    return data.configuration
   };

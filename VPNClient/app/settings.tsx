@@ -1,23 +1,25 @@
 import { Image, Text, TouchableOpacity, Platform, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState, useContext } from "react";
-import AccordionList from "@/components/accordionList";
+import SettingsList from "@/components/settingsList";
 import { picktheme } from "@/constants/Styles";
 import { router } from "expo-router";
 import { ThemeContext } from "@/components/ui/ThemeProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome } from "@expo/vector-icons";
 import { ScrollView } from "react-native";
+import { Palette } from "lucide-react-native";
 import i18n from "@/locales/i18n";
-import { StyleSheet } from "react-native";
+import Sliders from "@/components/slider";
+
 export default function HomeScreen() {
   const themeContext = useContext(ThemeContext);
   if (!themeContext) {
     throw new Error("HomeScreen must be used within a ThemeProvider");
   }
-
   const [theme, setTheme] = themeContext;
   const style = picktheme(theme);
+  const [timerValue, setTimerValue]=useState(0);
   const themeOptions = [
     {
       name: "Arctic",
@@ -52,26 +54,27 @@ export default function HomeScreen() {
   ];
 
   return (
-    <SafeAreaView style={style.mainBg}>
+    <SafeAreaView style={{
+      backgroundColor: style.background.color,
+      height: "100%",
+      zIndex: -2,
+    }}>
       <TouchableOpacity
+        style={{ marginLeft: 10, marginTop: "10%" }}
         onPress={() => {
-          router.push("/");
+          router.back();
         }}
       >
         <FontAwesome
-          style={{ marginLeft: 10, marginBottom: "10%" }}
           name="arrow-left"
           color="white"
           size={40}
         ></FontAwesome>
       </TouchableOpacity>
       <ScrollView style={{padding:10 }} >
-        <AccordionList
-          title="select language"
-          contentStyle={{
-            container: style.settingsContainer,
-            title: style.title,
-          }}
+        <SettingsList
+          title={i18n.t("language")}
+          colors={style.settingsList}
           list={languageOptions}
           onPress={(selectedOption)=>{
               i18n.locale = String(selectedOption);
@@ -80,24 +83,23 @@ export default function HomeScreen() {
           }
         > 
           <FontAwesome name="language" color="white" size={22}></FontAwesome>
-        </AccordionList>
+        </SettingsList>
         <View style={{height:5}} />
-        <AccordionList
+        <SettingsList
           title={i18n.t("sel-theme")}
-          contentStyle={{
-            container: style.settingsContainer,
-            title: style.title,
-          }}
+          colors={style.settingsList}
           list={themeOptions}
           onPress={
-            selectedOption => {
+            (selectedOption:string) => {
               AsyncStorage.setItem("theme", String(selectedOption));
-              setTheme(String(selectedOption))
+              setTheme(selectedOption)
             }
           }
         >
-          <FontAwesome name="pencil" color="white" size={22}></FontAwesome>
-        </AccordionList>
+          <Palette  size={22} color="white"/>
+        </SettingsList>
+        <View style={{height:5}} />
+        <Sliders onValueSet={()=>console.log('set')} setValue={setTimerValue} value={timerValue} colors={style.slider}></Sliders>
       </ScrollView>
     </SafeAreaView>
   );

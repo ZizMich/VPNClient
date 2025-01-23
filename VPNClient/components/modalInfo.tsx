@@ -1,22 +1,45 @@
-import { Modal, Text, TouchableOpacity, View, StyleProp, ViewStyle, TextStyle } from "react-native";
+import { Modal, Text, TouchableOpacity, View, StyleProp, ViewStyle, TextStyle, StyleSheet } from "react-native";
 
 export default function ModalInfo({
   modalVisible,
   modalText,
   onClose,
-  style,
+  colors
 }: {
   modalVisible: boolean;
   modalText: string;
   onClose: () => void;
-  
-  style:{
-    title: StyleProp<TextStyle>
-    container: StyleProp<ViewStyle>
-    button: StyleProp<ViewStyle>
+  colors:{title:string, container:string, button:string}
 
-  }
-}) {
+  
+})
+ {
+  const style = StyleSheet.create({
+    title:{
+     fontSize: 18,
+     fontWeight: "bold",
+     color:colors.title
+    },
+    modalButton:{
+      width:60,
+      marginTop:"10%",
+      alignSelf:"center",
+      alignItems:"center",
+      height:30,
+      borderRadius:5,
+      backgroundColor:colors.button,
+      
+    },
+  modalConttainer:{
+    alignItems:"center",
+    width: 300,
+    padding: 20,
+    backgroundColor: colors.container,
+    borderRadius: 10,
+  },
+
+
+});
   return (
     <Modal transparent={true} visible={modalVisible} onRequestClose={onClose}>
       <View
@@ -28,12 +51,12 @@ export default function ModalInfo({
         }}
       >
         <View
-          style={style.container}
+          style={style.modalConttainer}
         >
           <Text style={style.title}>
             {modalText}
           </Text>
-          <TouchableOpacity style={style.button} onPress={onClose}>
+          <TouchableOpacity style={style.modalButton} onPress={onClose}>
             <Text style={style.title}>Close</Text>
           </TouchableOpacity>
         </View>

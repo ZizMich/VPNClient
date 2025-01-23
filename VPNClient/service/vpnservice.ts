@@ -3,15 +3,13 @@ import RNSimpleOpenvpn, {
   removeVpnStateListener,
   VpnEventParams,
 } from "react-native-simple-openvpn";
-import { config } from "./const";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getVpn } from "../api/api";
-
 export async function startOvpn(serverCode:number,onWait?:()=>void, onConnected?:()=>void, onError?:(error:any)=>void) {
   const req =  await getVpn(serverCode);
   let timeout = Number(await AsyncStorage.getItem("settings-timeout"));
   if (!timeout) {
-    timeout = 20;
+    timeout = 40;
   }
   const timeoutInMilliseconds = timeout * 1000;
   try {
